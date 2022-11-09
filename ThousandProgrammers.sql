@@ -7,7 +7,16 @@ CREATE TABLE Users(
 	Username nvarchar(50) NULL,
 	Passwrod nvarchar(50) NULL);
 
-
+	insert into Users values ('a@a.com','ammar','aaaaa');
+	insert into Users values ('ab@ab.com','abdullah','ababab');
+	insert into Users values ('sa@sa.com','saed','saedsaed');
+	insert into Users values ('ob@ob.com','obada','3bada123');
+	insert into Users values ('fa@fa.com','fadi','fadi123');
+	insert into Users values ('abdalmohimen@gmail.com','abdalmohimen','abdalmohimen321');
+	insert into Users values ('msalati@gmail.com','mohammed','mohammedAbc');
+	insert into Users values ('mahmodAli@gmail.com','mahmodAli','usef123');
+	insert into Users values ('khaled.emp@gmail.com','khaild','khaild');
+	insert into Users values ('Omar.emp@gmail.com','3mar','3marAbc');
 
 CREATE TABLE [Admin](
 	AdminId   int PRIMARY KEY IDENTITY(1,1) NOT NULL,
@@ -18,21 +27,38 @@ CREATE TABLE [Admin](
 	CONSTRAINT FK_User_Admin FOREIGN KEY (UserId) 
 	REFERENCES Users (UserId));
 
+	insert into [Admin] values ('abdalmohimen','abdalmohimen',2022-11-03,6);
+
 
 	CREATE TABLE [Status](
 	StatusId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	Status nvarchar(50) NULL,
 	Date Date NULL)
 
-	
+	insert into [Status] values ('Ready To Start','3-11-2022');
+	insert into [Status] values ('Student','2022-11-03');
+	insert into [Status] values ('Graduate','2022-11-03');
+
+
 	CREATE TABLE Colleges(
 	CollegeId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	CollegeName nvarchar(50) NULL,
 	)
+		
+		
+	insert into Colleges values ('Information engneering');
+
+
 
 	CREATE TABLE Universities(
 	UniversityId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	U_Name nvarchar(50) NULL)
+
+
+	insert into Universities values ('Idleb');
+	insert into Universities values ('Aleppo');
+	insert into Universities values ('Sham');
+
 
 	CREATE TABLE UniversityColleges(
 	UniversityCollegesId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
@@ -43,6 +69,13 @@ CREATE TABLE [Admin](
 	REFERENCES Colleges (CollegeId),
 	CONSTRAINT FK_UniversityColleges_Universities FOREIGN KEY (UniversityId) 
 	REFERENCES Universities (UniversityId))
+
+
+	insert into UniversityColleges values (1,1,'Idleb');
+	insert into UniversityColleges values (2,1,'Izaz');
+	insert into UniversityColleges values (3,1,'Izaz');
+
+
 
 
 	CREATE TABLE Student(
@@ -64,12 +97,15 @@ CREATE TABLE [Admin](
 	);
 
 
+	insert into Student values ('ammar','naser',1,1,1,1);
+	insert into Student values ('abdullah','jbero',1,1,2,1);
+	insert into Student values ('saed','hizraoy',3,1,3,1);
+	insert into Student values ('Obada','halbi',2,1,4,1);
+	insert into Student values ('fadi','halabi',2,1,5,1);
+
+
+
 	
-
-
-	
-
-
 	CREATE TABLE Trainers(
 	TrainerId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	FirstName nvarchar(50) NULL,
@@ -79,6 +115,10 @@ CREATE TABLE [Admin](
 	CONSTRAINT FK_Trainers_Admin FOREIGN KEY (UserId) 
 	REFERENCES Users (UserId));
 
+
+	insert into Trainers values ('abdalmohimen','abdalmohimen','DB',6);
+	insert into Trainers values ('mohammed','msalati','ASP.NET',7);
+	insert into Trainers values ('mahmodAli','mohammed','Laravel',8);
 
 
 	CREATE TABLE PreviousExperience(
@@ -92,11 +132,18 @@ CREATE TABLE [Admin](
 	REFERENCES Trainers (TrainerId));
 
 
+	insert into PreviousExperience values ('C#','NET','2015-01-01','Microsft',2);
+	insert into PreviousExperience values ('ASP','NET','2016-01-01','Microsft',2);
+	insert into PreviousExperience values ('DB','Analays','2017-01-01','Oracal',1);
+	insert into PreviousExperience values ('PHP','BackEnd','2018-01-01','Microsft',3);
+
 	CREATE TABLE Course(
 	CourseId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	Name nvarchar(50) NULL,
 	CreatedByAdminId int NULL);
 
+	insert into Course values ('Full stack NET',1)
+	insert into Course values ('Full Stack Laravel',1)
 
 	CREATE TABLE CourseStudents(
 	CourseStudentsId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
@@ -108,6 +155,11 @@ CREATE TABLE [Admin](
 	REFERENCES Course (CourseId)
 	);
 
+	insert into CourseStudents values (2,1)
+	insert into CourseStudents values (3,1)
+	insert into CourseStudents values (4,2)
+	insert into CourseStudents values (5,2)
+	insert into CourseStudents values (6,2)
 
 	CREATE TABLE Parts(
 	PartId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
@@ -116,6 +168,11 @@ CREATE TABLE [Admin](
 	CONSTRAINT FK_Parts_Trainers FOREIGN KEY (TrainerId) 
 	REFERENCES Trainers (TrainerId));
 	
+	insert into Parts values ('CSharp',2)
+	insert into Parts values ('ASP',2)
+	insert into Parts values ('DB',1)
+	insert into Parts values ('PHP',3)
+	insert into Parts values ('Laravel',3)
 	
 	
 	CREATE TABLE PartsOfCourse(
@@ -128,6 +185,12 @@ CREATE TABLE [Admin](
 	REFERENCES Course (CourseId),
 	CONSTRAINT FK_PartsOfCourse_Parts FOREIGN KEY (PartId) 
 	REFERENCES Parts (PartId));
+	
+	
+	insert into PartsOfCourse values ('1-1-2022','1-3-2022',1,1)
+	insert into PartsOfCourse values ('1-4-2022','1-6-2022',1,2)
+	insert into PartsOfCourse values ('1-2-2022','1-4-2022',2,3)
+	insert into PartsOfCourse values ('1-5-2022','1-7-2022',2,4)
 
 	
 	CREATE TABLE CourseDays(
@@ -137,6 +200,14 @@ CREATE TABLE [Admin](
 	CONSTRAINT FK_CourseDays_Parts FOREIGN KEY (PartId) 
 	REFERENCES Parts (PartId));
 
+
+	insert into CourseDays values (1,1)
+	insert into CourseDays values (3,1)
+	insert into CourseDays values (5,1)
+	insert into CourseDays values (7,1)
+	insert into CourseDays values (2,1)
+	insert into CourseDays values (4,1)
+	insert into CourseDays values (6,1)
 
 
 	CREATE TABLE Lectures(
@@ -148,6 +219,10 @@ CREATE TABLE [Admin](
 	REFERENCES PartsOfCourse (PartsOfCourseId)
 	);
 
+	insert into Lectures values ('introduction to cSharp','Start',1)
+	insert into Lectures values ('condition stattement','if switch',1)
+	insert into Lectures values ('introduction to cSharp','Start',1)
+	insert into Lectures values ('introduction to cSharp','Start',1)
 
 	CREATE TABLE Attendance(
 	AttendanceId int NOT NULL,
@@ -160,7 +235,15 @@ CREATE TABLE [Admin](
 	REFERENCES Student (StudentId)
 	)
 
+	insert into Attendance values (2,1,True)
+	insert into Attendance values (3,1,False)
+	insert into Attendance values (2,2,True)
+	insert into Attendance values (3,2,True)
+	insert into Attendance values (4,3,True)
+	insert into Attendance values (5,3,False)
+	insert into Attendance values (6,3,True)
 
+	
 	CREATE TABLE Assignments(
 	AssignmentId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	StartDate date NULL,
@@ -175,6 +258,10 @@ CREATE TABLE [Admin](
 	REFERENCES Trainers (TrainerId));
 
 
+	insert into Assignments values ('2022-01-07','2022-01-08','First Assignments',1,'00:05:00',2)
+	insert into Assignments values ('2022-01-10','2022-01-12','Second assignment',2,'00:05:00',3)
+
+
 	CREATE TABLE Questions(
 	QuestionId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	Question nvarchar(50) NULL,
@@ -183,6 +270,8 @@ CREATE TABLE [Admin](
 	CONSTRAINT FK_Questions_Assignments FOREIGN KEY (AssignmentId) 
 	REFERENCES Assignments (AssignmentId));
 
+	insert into Questions values ('print hello world',1,0)
+	insert into Questions values ('sum two number',2,0)
 
 	CREATE TABLE Answers(
 	AnswerId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
@@ -194,12 +283,19 @@ CREATE TABLE [Admin](
 	CONSTRAINT FK_Answers_Student FOREIGN KEY (StudentId) 
 	REFERENCES Student (StudentId));
 
+	insert into Questions values ('hello world',1,2)
+	insert into Questions values ('Hello World',1,3)
+	insert into Questions values ('2+3',2,2)
+	insert into Questions values ('4+5',2,3)
 
 	CREATE TABLE Company(
 	CompanyId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	Name nvarchar(50) NULL,
 	Email nvarchar(50) NULL,
 	address nvarchar(50) NULL)
+
+	insert into Company values ('Micrsoft','micro@soft.com','America')
+	insert into Company values ('LinkedIn','linke@In.com','America')
 
 
 	CREATE TABLE Employees(
@@ -212,6 +308,8 @@ CREATE TABLE [Admin](
 	CONSTRAINT FK_Employees_Company FOREIGN KEY (CompanyId) 
 	REFERENCES Company (CompanyId));
 
+	insert into Employees values ('khaild',1,1)
+	insert into Employees values ('Omar',2,2)
 
 	CREATE TABLE Jobs(
 	JobId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
@@ -221,6 +319,9 @@ CREATE TABLE [Admin](
 	CONSTRAINT FK_Jobs_Company FOREIGN KEY (CompanyId) 
 	REFERENCES Company (CompanyId));
 
+	insert into Jobs values ('full stack dev','2022-01-05',1)
+	insert into Jobs values ('front end','2022-07-07',1)
+	insert into Jobs values ('back end','2022-01-06',2)
 
 	CREATE TABLE Requirements(
 	RequirementsId int PRIMARY KEY IDENTITY(1,1) NOT NULL,
@@ -229,6 +330,13 @@ CREATE TABLE [Admin](
 	CONSTRAINT FK_Requirements_Jobs FOREIGN KEY (JobId) 
 	REFERENCES Jobs (JobId));
 
+	insert into Requirements values ('asp.net',1)
+	insert into Requirements values ('html',2)
+	insert into Requirements values ('css',2)
+	insert into Requirements values ('js',2)
+	insert into Requirements values ('c#',3)
+	insert into Requirements values ('sql',3)
+	insert into Requirements values ('entity freamwork',3)
 
 
 	CREATE TABLE Posts(
@@ -245,6 +353,8 @@ CREATE TABLE [Admin](
 	REFERENCES Employees (EmployeeId),
 	)
 
+	insert into Posts values ('what is new in .NET 8','the new futuer in .NET 8 ','2022-02-11','/image/.NET8.png',1,2)
+	insert into Posts values ('how to fast your query','top 3 wrong make yor query slowly','2022-12-02','/image/query.jpg',2,1)
 
 	
 	CREATE TABLE Comments(
@@ -259,20 +369,7 @@ CREATE TABLE [Admin](
 	REFERENCES Employees (EmployeeId),
 	)
 
+	insert into Comments values ('Wow','2022-02-11',1,1)
+	insert into Comments values ('thanks it was very good','2022-02-12',3,2)
 	
-	
-
-	
-
-
-	
-
-	
-
-	
-
-
-	
-
-
 	
